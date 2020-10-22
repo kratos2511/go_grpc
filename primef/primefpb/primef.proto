@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package primefpb;
+option go_package = "src/github.com/kratos2511/go_grpc/primef/primefpb";
+
+message GetPrimeFactorsRequest {
+    int32 number = 1;
+}
+
+message GetPrimeFactorsResponse {
+    int32 factor = 1;
+}
+
+service PrimeFactorService {
+    rpc GetPrimeFactors(GetPrimeFactorsRequest) returns (stream GetPrimeFactorsResponse) {}
+}
