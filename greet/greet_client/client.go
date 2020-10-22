@@ -1,7 +1,7 @@
 package main
 
 import (
-	"fmt"
+	"context"
 	"log"
 
 	"github.com/kratos2511/go_grpc/greet/greetpb"
@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-	fmt.Println("Hello I'm a client")
+	log.Println("Hello I'm a client")
 
 	cc, err := grpc.Dial("localhost:50051", grpc.WithInsecure())
 
@@ -21,6 +21,19 @@ func main() {
 	defer cc.Close()
 	c := greetpb.NewGreetServiceClient(cc)
 
-	fmt.Printf("created client: %f", c)
+	log.Printf("created client: %f", c)
+	for i := 0; i < 50; i++ {
+		req := &greetpb.GreetRequest{
+			Greeting: &greetpb.Greeting{
+				FirstName: "Rahul",
+				LastName:  "Sachan",
+			},
+		}
+		if res, err := c.Greet(context.Background(), req); err != nil {
+			log.Fatalf("error while calling Greet RPC %v", err)
+		} else {
+			log.Printf("Respose %v", res)
+		}
+	}
 
 }
