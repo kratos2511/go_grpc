@@ -7,6 +7,8 @@
 package greetpb
 
 import (
+	context "context"
+	grpc "google.golang.org/grpc"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -64,4 +66,46 @@ func file_src_github_com_kratos2511_go_grpc_greet_greetpb_greet_proto_init() {
 	file_src_github_com_kratos2511_go_grpc_greet_greetpb_greet_proto_rawDesc = nil
 	file_src_github_com_kratos2511_go_grpc_greet_greetpb_greet_proto_goTypes = nil
 	file_src_github_com_kratos2511_go_grpc_greet_greetpb_greet_proto_depIdxs = nil
+}
+
+// Reference imports to suppress errors if they are not otherwise used.
+var _ context.Context
+var _ grpc.ClientConnInterface
+
+// This is a compile-time assertion to ensure that this generated file
+// is compatible with the grpc package it is being compiled against.
+const _ = grpc.SupportPackageIsVersion6
+
+// GreetServiceClient is the client API for GreetService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type GreetServiceClient interface {
+}
+
+type greetServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewGreetServiceClient(cc grpc.ClientConnInterface) GreetServiceClient {
+	return &greetServiceClient{cc}
+}
+
+// GreetServiceServer is the server API for GreetService service.
+type GreetServiceServer interface {
+}
+
+// UnimplementedGreetServiceServer can be embedded to have forward compatible implementations.
+type UnimplementedGreetServiceServer struct {
+}
+
+func RegisterGreetServiceServer(s *grpc.Server, srv GreetServiceServer) {
+	s.RegisterService(&_GreetService_serviceDesc, srv)
+}
+
+var _GreetService_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "greet.GreetService",
+	HandlerType: (*GreetServiceServer)(nil),
+	Methods:     []grpc.MethodDesc{},
+	Streams:     []grpc.StreamDesc{},
+	Metadata:    "src/github.com/kratos2511/go_grpc/greet/greetpb/greet.proto",
 }
