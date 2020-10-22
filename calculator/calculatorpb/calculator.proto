@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package calculator;
+option go_package = "src/github.com/kratos2511/go_grpc/calculator/calculatorpb";
+
+service CalculateSumService {
+    rpc calculateSum(CalculateSumRequest) returns (CalculateSumResponse) {};
+}
+
+message Numbers {
+    repeated int32 numbers = 1;
+}
+
+message CalculateSumRequest {
+    Numbers numbers = 1;
+}
+
+message CalculateSumResponse {
+    int32 sum = 1;
+}
