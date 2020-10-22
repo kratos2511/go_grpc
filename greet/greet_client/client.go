@@ -22,6 +22,11 @@ func main() {
 	c := greetpb.NewGreetServiceClient(cc)
 
 	log.Printf("created client: %f", c)
+
+	doUnaryRequest(c)
+}
+
+func doUnaryRequest(c greetpb.GreetServiceClient) {
 	for i := 0; i < 50; i++ {
 		req := &greetpb.GreetRequest{
 			Greeting: &greetpb.Greeting{
@@ -35,5 +40,4 @@ func main() {
 			log.Printf("Respose %v", res)
 		}
 	}
-
 }
