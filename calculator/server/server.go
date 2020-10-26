@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"io"
 	"log"
 	"net"
 
@@ -22,6 +23,25 @@ func (*server) CalculateSum(ctx context.Context, req *calculatorpb.CalculateSumR
 	return &calculatorpb.CalculateSumResponse{
 		Sum: sum,
 	}, nil
+}
+
+func (*server) StreamAvg(stream calculatorpb.CalculateSumService_StreamAvgServer) error {
+	log.Println("Init StreamAvg request")
+	var sum float32
+	var count float32
+
+	for {
+		msg, err := stream.Recv()
+		if err == io.EOF {
+			log.Println("Responding to the request")
+			return stream.SendAndClose(&calculatorpb.StreamAvgResponse{Average: sum / count})
+		} else if err != nil {
+			log.Fatalln("Error recieveing params, error: ", err)
+		}
+		count++
+		sum += float32(msg.GetNumber())
+		log.Println("total:", sum, "\tcount:", count)
+	}
 }
 
 func main() {

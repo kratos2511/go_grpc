@@ -5,6 +5,7 @@ option go_package = "src/github.com/kratos2511/go_grpc/calculator/calculatorpb";
 
 service CalculateSumService {
     rpc calculateSum(CalculateSumRequest) returns (CalculateSumResponse) {};
+    rpc streamAvg(stream StreamAvgRequest) returns (StreamAvgResponse){};
 }
 
 message Numbers {
@@ -17,4 +18,12 @@ message CalculateSumRequest {
 
 message CalculateSumResponse {
     int32 sum = 1;
+}
+
+message StreamAvgRequest {
+    int32 number = 1;
+}
+
+message StreamAvgResponse {
+    float average = 1;
 }

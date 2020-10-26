@@ -165,6 +165,100 @@ func (x *CalculateSumResponse) GetSum() int32 {
 	return 0
 }
 
+type StreamAvgRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Number int32 `protobuf:"varint,1,opt,name=number,proto3" json:"number,omitempty"`
+}
+
+func (x *StreamAvgRequest) Reset() {
+	*x = StreamAvgRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_src_github_com_kratos2511_go_grpc_calculator_calculatorpb_calculator_proto_msgTypes[3]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *StreamAvgRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StreamAvgRequest) ProtoMessage() {}
+
+func (x *StreamAvgRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_src_github_com_kratos2511_go_grpc_calculator_calculatorpb_calculator_proto_msgTypes[3]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StreamAvgRequest.ProtoReflect.Descriptor instead.
+func (*StreamAvgRequest) Descriptor() ([]byte, []int) {
+	return file_src_github_com_kratos2511_go_grpc_calculator_calculatorpb_calculator_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *StreamAvgRequest) GetNumber() int32 {
+	if x != nil {
+		return x.Number
+	}
+	return 0
+}
+
+type StreamAvgResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Average float32 `protobuf:"fixed32,1,opt,name=average,proto3" json:"average,omitempty"`
+}
+
+func (x *StreamAvgResponse) Reset() {
+	*x = StreamAvgResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_src_github_com_kratos2511_go_grpc_calculator_calculatorpb_calculator_proto_msgTypes[4]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *StreamAvgResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StreamAvgResponse) ProtoMessage() {}
+
+func (x *StreamAvgResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_src_github_com_kratos2511_go_grpc_calculator_calculatorpb_calculator_proto_msgTypes[4]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StreamAvgResponse.ProtoReflect.Descriptor instead.
+func (*StreamAvgResponse) Descriptor() ([]byte, []int) {
+	return file_src_github_com_kratos2511_go_grpc_calculator_calculatorpb_calculator_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *StreamAvgResponse) GetAverage() float32 {
+	if x != nil {
+		return x.Average
+	}
+	return 0
+}
+
 var File_src_github_com_kratos2511_go_grpc_calculator_calculatorpb_calculator_proto protoreflect.FileDescriptor
 
 var file_src_github_com_kratos2511_go_grpc_calculator_calculatorpb_calculator_proto_rawDesc = []byte{
@@ -182,18 +276,29 @@ var file_src_github_com_kratos2511_go_grpc_calculator_calculatorpb_calculator_pr
 	0x6f, 0x72, 0x2e, 0x4e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x73, 0x52, 0x07, 0x6e, 0x75, 0x6d, 0x62,
 	0x65, 0x72, 0x73, 0x22, 0x28, 0x0a, 0x14, 0x43, 0x61, 0x6c, 0x63, 0x75, 0x6c, 0x61, 0x74, 0x65,
 	0x53, 0x75, 0x6d, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x10, 0x0a, 0x03, 0x73,
-	0x75, 0x6d, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x03, 0x73, 0x75, 0x6d, 0x32, 0x6a, 0x0a,
-	0x13, 0x43, 0x61, 0x6c, 0x63, 0x75, 0x6c, 0x61, 0x74, 0x65, 0x53, 0x75, 0x6d, 0x53, 0x65, 0x72,
-	0x76, 0x69, 0x63, 0x65, 0x12, 0x53, 0x0a, 0x0c, 0x63, 0x61, 0x6c, 0x63, 0x75, 0x6c, 0x61, 0x74,
-	0x65, 0x53, 0x75, 0x6d, 0x12, 0x1f, 0x2e, 0x63, 0x61, 0x6c, 0x63, 0x75, 0x6c, 0x61, 0x74, 0x6f,
-	0x72, 0x2e, 0x43, 0x61, 0x6c, 0x63, 0x75, 0x6c, 0x61, 0x74, 0x65, 0x53, 0x75, 0x6d, 0x52, 0x65,
-	0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x20, 0x2e, 0x63, 0x61, 0x6c, 0x63, 0x75, 0x6c, 0x61, 0x74,
-	0x6f, 0x72, 0x2e, 0x43, 0x61, 0x6c, 0x63, 0x75, 0x6c, 0x61, 0x74, 0x65, 0x53, 0x75, 0x6d, 0x52,
-	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x42, 0x3b, 0x5a, 0x39, 0x73, 0x72, 0x63,
-	0x2f, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x6b, 0x72, 0x61, 0x74,
-	0x6f, 0x73, 0x32, 0x35, 0x31, 0x31, 0x2f, 0x67, 0x6f, 0x5f, 0x67, 0x72, 0x70, 0x63, 0x2f, 0x63,
-	0x61, 0x6c, 0x63, 0x75, 0x6c, 0x61, 0x74, 0x6f, 0x72, 0x2f, 0x63, 0x61, 0x6c, 0x63, 0x75, 0x6c,
-	0x61, 0x74, 0x6f, 0x72, 0x70, 0x62, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x75, 0x6d, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x03, 0x73, 0x75, 0x6d, 0x22, 0x2a, 0x0a,
+	0x10, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x41, 0x76, 0x67, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
+	0x74, 0x12, 0x16, 0x0a, 0x06, 0x6e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x05, 0x52, 0x06, 0x6e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x22, 0x2d, 0x0a, 0x11, 0x53, 0x74, 0x72,
+	0x65, 0x61, 0x6d, 0x41, 0x76, 0x67, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x18,
+	0x0a, 0x07, 0x61, 0x76, 0x65, 0x72, 0x61, 0x67, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x02, 0x52,
+	0x07, 0x61, 0x76, 0x65, 0x72, 0x61, 0x67, 0x65, 0x32, 0xb8, 0x01, 0x0a, 0x13, 0x43, 0x61, 0x6c,
+	0x63, 0x75, 0x6c, 0x61, 0x74, 0x65, 0x53, 0x75, 0x6d, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65,
+	0x12, 0x53, 0x0a, 0x0c, 0x63, 0x61, 0x6c, 0x63, 0x75, 0x6c, 0x61, 0x74, 0x65, 0x53, 0x75, 0x6d,
+	0x12, 0x1f, 0x2e, 0x63, 0x61, 0x6c, 0x63, 0x75, 0x6c, 0x61, 0x74, 0x6f, 0x72, 0x2e, 0x43, 0x61,
+	0x6c, 0x63, 0x75, 0x6c, 0x61, 0x74, 0x65, 0x53, 0x75, 0x6d, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
+	0x74, 0x1a, 0x20, 0x2e, 0x63, 0x61, 0x6c, 0x63, 0x75, 0x6c, 0x61, 0x74, 0x6f, 0x72, 0x2e, 0x43,
+	0x61, 0x6c, 0x63, 0x75, 0x6c, 0x61, 0x74, 0x65, 0x53, 0x75, 0x6d, 0x52, 0x65, 0x73, 0x70, 0x6f,
+	0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x4c, 0x0a, 0x09, 0x73, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x41,
+	0x76, 0x67, 0x12, 0x1c, 0x2e, 0x63, 0x61, 0x6c, 0x63, 0x75, 0x6c, 0x61, 0x74, 0x6f, 0x72, 0x2e,
+	0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x41, 0x76, 0x67, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x1a, 0x1d, 0x2e, 0x63, 0x61, 0x6c, 0x63, 0x75, 0x6c, 0x61, 0x74, 0x6f, 0x72, 0x2e, 0x53, 0x74,
+	0x72, 0x65, 0x61, 0x6d, 0x41, 0x76, 0x67, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22,
+	0x00, 0x28, 0x01, 0x42, 0x3b, 0x5a, 0x39, 0x73, 0x72, 0x63, 0x2f, 0x67, 0x69, 0x74, 0x68, 0x75,
+	0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x6b, 0x72, 0x61, 0x74, 0x6f, 0x73, 0x32, 0x35, 0x31, 0x31,
+	0x2f, 0x67, 0x6f, 0x5f, 0x67, 0x72, 0x70, 0x63, 0x2f, 0x63, 0x61, 0x6c, 0x63, 0x75, 0x6c, 0x61,
+	0x74, 0x6f, 0x72, 0x2f, 0x63, 0x61, 0x6c, 0x63, 0x75, 0x6c, 0x61, 0x74, 0x6f, 0x72, 0x70, 0x62,
+	0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -208,18 +313,22 @@ func file_src_github_com_kratos2511_go_grpc_calculator_calculatorpb_calculator_p
 	return file_src_github_com_kratos2511_go_grpc_calculator_calculatorpb_calculator_proto_rawDescData
 }
 
-var file_src_github_com_kratos2511_go_grpc_calculator_calculatorpb_calculator_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_src_github_com_kratos2511_go_grpc_calculator_calculatorpb_calculator_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_src_github_com_kratos2511_go_grpc_calculator_calculatorpb_calculator_proto_goTypes = []interface{}{
 	(*Numbers)(nil),              // 0: calculator.Numbers
 	(*CalculateSumRequest)(nil),  // 1: calculator.CalculateSumRequest
 	(*CalculateSumResponse)(nil), // 2: calculator.CalculateSumResponse
+	(*StreamAvgRequest)(nil),     // 3: calculator.StreamAvgRequest
+	(*StreamAvgResponse)(nil),    // 4: calculator.StreamAvgResponse
 }
 var file_src_github_com_kratos2511_go_grpc_calculator_calculatorpb_calculator_proto_depIdxs = []int32{
 	0, // 0: calculator.CalculateSumRequest.numbers:type_name -> calculator.Numbers
 	1, // 1: calculator.CalculateSumService.calculateSum:input_type -> calculator.CalculateSumRequest
-	2, // 2: calculator.CalculateSumService.calculateSum:output_type -> calculator.CalculateSumResponse
-	2, // [2:3] is the sub-list for method output_type
-	1, // [1:2] is the sub-list for method input_type
+	3, // 2: calculator.CalculateSumService.streamAvg:input_type -> calculator.StreamAvgRequest
+	2, // 3: calculator.CalculateSumService.calculateSum:output_type -> calculator.CalculateSumResponse
+	4, // 4: calculator.CalculateSumService.streamAvg:output_type -> calculator.StreamAvgResponse
+	3, // [3:5] is the sub-list for method output_type
+	1, // [1:3] is the sub-list for method input_type
 	1, // [1:1] is the sub-list for extension type_name
 	1, // [1:1] is the sub-list for extension extendee
 	0, // [0:1] is the sub-list for field type_name
@@ -267,6 +376,30 @@ func file_src_github_com_kratos2511_go_grpc_calculator_calculatorpb_calculator_p
 				return nil
 			}
 		}
+		file_src_github_com_kratos2511_go_grpc_calculator_calculatorpb_calculator_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*StreamAvgRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_src_github_com_kratos2511_go_grpc_calculator_calculatorpb_calculator_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*StreamAvgResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -274,7 +407,7 @@ func file_src_github_com_kratos2511_go_grpc_calculator_calculatorpb_calculator_p
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_src_github_com_kratos2511_go_grpc_calculator_calculatorpb_calculator_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   3,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
@@ -301,6 +434,7 @@ const _ = grpc.SupportPackageIsVersion6
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type CalculateSumServiceClient interface {
 	CalculateSum(ctx context.Context, in *CalculateSumRequest, opts ...grpc.CallOption) (*CalculateSumResponse, error)
+	StreamAvg(ctx context.Context, opts ...grpc.CallOption) (CalculateSumService_StreamAvgClient, error)
 }
 
 type calculateSumServiceClient struct {
@@ -320,9 +454,44 @@ func (c *calculateSumServiceClient) CalculateSum(ctx context.Context, in *Calcul
 	return out, nil
 }
 
+func (c *calculateSumServiceClient) StreamAvg(ctx context.Context, opts ...grpc.CallOption) (CalculateSumService_StreamAvgClient, error) {
+	stream, err := c.cc.NewStream(ctx, &_CalculateSumService_serviceDesc.Streams[0], "/calculator.CalculateSumService/streamAvg", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &calculateSumServiceStreamAvgClient{stream}
+	return x, nil
+}
+
+type CalculateSumService_StreamAvgClient interface {
+	Send(*StreamAvgRequest) error
+	CloseAndRecv() (*StreamAvgResponse, error)
+	grpc.ClientStream
+}
+
+type calculateSumServiceStreamAvgClient struct {
+	grpc.ClientStream
+}
+
+func (x *calculateSumServiceStreamAvgClient) Send(m *StreamAvgRequest) error {
+	return x.ClientStream.SendMsg(m)
+}
+
+func (x *calculateSumServiceStreamAvgClient) CloseAndRecv() (*StreamAvgResponse, error) {
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	m := new(StreamAvgResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // CalculateSumServiceServer is the server API for CalculateSumService service.
 type CalculateSumServiceServer interface {
 	CalculateSum(context.Context, *CalculateSumRequest) (*CalculateSumResponse, error)
+	StreamAvg(CalculateSumService_StreamAvgServer) error
 }
 
 // UnimplementedCalculateSumServiceServer can be embedded to have forward compatible implementations.
@@ -331,6 +500,9 @@ type UnimplementedCalculateSumServiceServer struct {
 
 func (*UnimplementedCalculateSumServiceServer) CalculateSum(context.Context, *CalculateSumRequest) (*CalculateSumResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CalculateSum not implemented")
+}
+func (*UnimplementedCalculateSumServiceServer) StreamAvg(CalculateSumService_StreamAvgServer) error {
+	return status.Errorf(codes.Unimplemented, "method StreamAvg not implemented")
 }
 
 func RegisterCalculateSumServiceServer(s *grpc.Server, srv CalculateSumServiceServer) {
@@ -355,6 +527,32 @@ func _CalculateSumService_CalculateSum_Handler(srv interface{}, ctx context.Cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _CalculateSumService_StreamAvg_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(CalculateSumServiceServer).StreamAvg(&calculateSumServiceStreamAvgServer{stream})
+}
+
+type CalculateSumService_StreamAvgServer interface {
+	SendAndClose(*StreamAvgResponse) error
+	Recv() (*StreamAvgRequest, error)
+	grpc.ServerStream
+}
+
+type calculateSumServiceStreamAvgServer struct {
+	grpc.ServerStream
+}
+
+func (x *calculateSumServiceStreamAvgServer) SendAndClose(m *StreamAvgResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func (x *calculateSumServiceStreamAvgServer) Recv() (*StreamAvgRequest, error) {
+	m := new(StreamAvgRequest)
+	if err := x.ServerStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 var _CalculateSumService_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "calculator.CalculateSumService",
 	HandlerType: (*CalculateSumServiceServer)(nil),
@@ -364,6 +562,12 @@ var _CalculateSumService_serviceDesc = grpc.ServiceDesc{
 			Handler:    _CalculateSumService_CalculateSum_Handler,
 		},
 	},
-	Streams:  []grpc.StreamDesc{},
+	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "streamAvg",
+			Handler:       _CalculateSumService_StreamAvg_Handler,
+			ClientStreams: true,
+		},
+	},
 	Metadata: "src/github.com/kratos2511/go_grpc/calculator/calculatorpb/calculator.proto",
 }

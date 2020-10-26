@@ -53,7 +53,7 @@ func (*server) LongGreet(stream greetpb.GreetService_LongGreetServer) error {
 			log.Fatalln("Server encountered error on recieve", err)
 		}
 		log.Println("Hello", msg.GetGreeting().GetFirstName(), msg.GetGreeting().GetLastName())
-		result += "Hello " + msg.GetGreeting().GetFirstName() + msg.GetGreeting().GetLastName() + "! "
+		result += "Hello " + msg.GetGreeting().GetFirstName() + " " + msg.GetGreeting().GetLastName() + "! "
 	}
 }
 
