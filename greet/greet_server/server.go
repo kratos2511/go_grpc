@@ -43,15 +43,17 @@ func (*server) LongGreet(stream greetpb.GreetService_LongGreetServer) error {
 	result := ""
 	for {
 		msg, err := stream.Recv()
-		if err != io.EOF {
+		log.Println("LongGreet message: ", msg)
+		if err == io.EOF {
 			//Respond to client
+			log.Println("LongGreet response to close stream")
 			return stream.SendAndClose(&greetpb.LongGreetResponse{Result: result})
 		}
 		if err != nil {
 			log.Fatalln("Server encountered error on recieve", err)
 		}
 		log.Println("Hello", msg.GetGreeting().GetFirstName(), msg.GetGreeting().GetLastName())
-		result = "Hello " + msg.GetGreeting().GetFirstName() + msg.GetGreeting().GetLastName() + "! "
+		result += "Hello " + msg.GetGreeting().GetFirstName() + msg.GetGreeting().GetLastName() + "! "
 	}
 }
 

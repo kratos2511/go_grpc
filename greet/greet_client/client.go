@@ -4,6 +4,7 @@ import (
 	"context"
 	"io"
 	"log"
+	"time"
 
 	"github.com/kratos2511/go_grpc/greet/greetpb"
 
@@ -25,7 +26,8 @@ func main() {
 	log.Printf("created client: %f", c)
 
 	//doUnaryRequest(c)
-	doServerStreamingRequest(c)
+	//doServerStreamingRequest(c)
+	doClientStream(c)
 }
 
 func doUnaryRequest(c greetpb.GreetServiceClient) {
@@ -62,4 +64,50 @@ func doServerStreamingRequest(c greetpb.GreetServiceClient) {
 			log.Printf("Respose: %v", msg)
 		}
 	}
+}
+
+func doClientStream(c greetpb.GreetServiceClient) {
+	log.Println("Client Streaming Init")
+	stream, err := c.LongGreet(context.Background())
+	if err != nil {
+		log.Fatalln("Error calling server")
+	}
+	data := []*greetpb.LongGreetRequest{
+		&greetpb.LongGreetRequest{
+			Greeting: &greetpb.Greeting{
+				FirstName: "Rahul",
+				LastName:  "Sachan",
+			},
+		},
+		&greetpb.LongGreetRequest{
+			Greeting: &greetpb.Greeting{
+				FirstName: "Abhay",
+				LastName:  "Sachan",
+			},
+		},
+		&greetpb.LongGreetRequest{
+			Greeting: &greetpb.Greeting{
+				FirstName: "Isha",
+				LastName:  "Singh",
+			},
+		},
+		&greetpb.LongGreetRequest{
+			Greeting: &greetpb.Greeting{
+				FirstName: "Pratesh",
+				LastName:  "Jhari",
+			},
+		},
+	}
+	for _, val := range data {
+		log.Println("Client sending data")
+		stream.Send(val)
+		time.Sleep(100 * time.Millisecond)
+	}
+
+	if res, err := stream.CloseAndRecv(); err != nil {
+		log.Fatalln("Client encountered error", err)
+	} else {
+		log.Println("Response:", res)
+	}
+
 }
