@@ -27,7 +27,8 @@ func main() {
 
 	//doUnaryRequest(c)
 	//doServerStreamingRequest(c)
-	doClientStream(c)
+	//doClientStream(c)
+	doBiDiStreaming(c)
 }
 
 func doUnaryRequest(c greetpb.GreetServiceClient) {
@@ -110,4 +111,47 @@ func doClientStream(c greetpb.GreetServiceClient) {
 		log.Println("Response:", res)
 	}
 
+}
+
+func doBiDiStreaming(c greetpb.GreetServiceClient) {
+	log.Println("Client Bidirectional Streaming Init")
+
+	stream, err := c.GreetEveryone(context.Background())
+
+	if err != nil {
+		log.Fatalln("Error in creating stream, err: ", err)
+		return
+	}
+	waitc := make(chan struct{})
+
+	go func() {
+		for i := 0; i < 10; i++ {
+			log.Println("Sending message...")
+			stream.Send(&greetpb.GreetEveryoneRequest{
+				Greeting: &greetpb.Greeting{
+					FirstName: "Rahul",
+					LastName:  "Sachan",
+				},
+			})
+			time.Sleep(1000 * time.Millisecond)
+		}
+		stream.CloseSend()
+	}()
+
+	go func() {
+		for {
+			req, err := stream.Recv()
+			if err == io.EOF {
+				log.Println("EOF Recieved")
+				break
+			} else if err != nil {
+				log.Fatalln("BiDi Client error. err: ", err)
+				break
+			}
+			log.Println("req: ", req.GetResult())
+		}
+		close(waitc)
+	}()
+
+	<-waitc
 }
