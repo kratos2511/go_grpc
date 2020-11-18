@@ -2,7 +2,10 @@ package main
 
 import (
 	"context"
+	"io"
 	"log"
+	"math/rand"
+	"time"
 
 	"github.com/kratos2511/go_grpc/calculator/calculatorpb"
 	"google.golang.org/grpc"
@@ -23,7 +26,9 @@ func main() {
 
 	//makeRequest(c)
 
-	doStreamAvgRequest(c)
+	//doStreamAvgRequest(c)
+
+	doSteamingMaximum(c)
 }
 
 func makeRequest(c calculatorpb.CalculateSumServiceClient) {
@@ -59,4 +64,44 @@ func doStreamAvgRequest(c calculatorpb.CalculateSumServiceClient) {
 	} else {
 		log.Println("Client recieved average:", res.GetAverage())
 	}
+}
+
+func doSteamingMaximum(c calculatorpb.CalculateSumServiceClient) {
+	log.Println("Init client")
+
+	stream, err := c.FindMaximum(context.Background())
+
+	if err != nil {
+		log.Fatalln("Client encountered error while opening stream. err: ", err)
+		return
+	}
+
+	waitc := make(chan struct{})
+	rand.Seed(time.Now().UnixNano())
+
+	go func() {
+		for i := 0; i < 50; i++ {
+			stream.Send(&calculatorpb.FindMaximumRequest{
+				Number: rand.Int63(),
+			})
+			time.Sleep(100 * time.Millisecond)
+		}
+		stream.CloseSend()
+	}()
+
+	go func() {
+		for {
+			res, err := stream.Recv()
+			if err == io.EOF {
+				log.Println("Server send EOF")
+				break
+			} else if err != nil {
+				log.Fatalln("Error reading stream. err: ", err)
+				break
+			}
+			log.Println("Maximum: ", res.GetMaximum())
+		}
+		close(waitc)
+	}()
+	<-waitc
 }

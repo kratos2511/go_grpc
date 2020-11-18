@@ -44,6 +44,33 @@ func (*server) StreamAvg(stream calculatorpb.CalculateSumService_StreamAvgServer
 	}
 }
 
+func (*server) FindMaximum(stream calculatorpb.CalculateSumService_FindMaximumServer) error {
+	log.Println("Init FindMaximum request")
+	max := int64(0)
+	for {
+		msg, err := stream.Recv()
+		if err == io.EOF {
+			log.Println("Finished request stream")
+			return err
+		} else if err != nil {
+			log.Fatalln("Request recieve error. err: ", err)
+			return err
+		}
+
+		log.Println("Number recieved: ", msg.GetNumber())
+		if msg.GetNumber() > max {
+			max = msg.GetNumber()
+		}
+		sendErr := stream.Send(&calculatorpb.FindMaximumResponse{
+			Maximum: max,
+		})
+		if sendErr != nil {
+			log.Fatalln("Server encountered error while responding. err: ", sendErr)
+			return sendErr
+		}
+	}
+}
+
 func main() {
 	log.Println("Calculator Server Init")
 
