@@ -9,6 +9,7 @@ import (
 
 	"github.com/kratos2511/go_grpc/calculator/calculatorpb"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/status"
 )
 
 func main() {
@@ -28,7 +29,9 @@ func main() {
 
 	//doStreamAvgRequest(c)
 
-	doSteamingMaximum(c)
+	//doSteamingMaximum(c)
+
+	doSquareRoot(c)
 }
 
 func makeRequest(c calculatorpb.CalculateSumServiceClient) {
@@ -104,4 +107,24 @@ func doSteamingMaximum(c calculatorpb.CalculateSumServiceClient) {
 		close(waitc)
 	}()
 	<-waitc
+}
+
+func doSquareRoot(c calculatorpb.CalculateSumServiceClient) {
+	numbers := []int32{100, 4, 9, -23, 144}
+	for _, i := range numbers {
+		req := &calculatorpb.SquareRootRequest{
+			Number: int32(i),
+		}
+		res, err := c.SquareRoot(context.Background(), req)
+		if err != nil {
+			resErr, ok := status.FromError(err)
+			if ok {
+				log.Println(resErr.Message(), resErr.Code())
+			} else {
+				log.Fatalf("Error %v", err)
+			}
+		} else {
+			log.Printf("Response %v\n", res.GetNumberRoot())
+		}
+	}
 }

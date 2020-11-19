@@ -7,6 +7,7 @@ service CalculateSumService {
     rpc calculateSum(CalculateSumRequest) returns (CalculateSumResponse) {};
     rpc streamAvg(stream StreamAvgRequest) returns (StreamAvgResponse){};
     rpc FindMaximum(stream FindMaximumRequest) returns (stream FindMaximumResponse) {};
+    rpc SquareRoot(SquareRootRequest) returns (SquareRootResponse) {};
 }
 
 message Numbers {
@@ -35,4 +36,12 @@ message FindMaximumRequest {
 
 message FindMaximumResponse {
     int64 maximum = 1;
+}
+
+message SquareRootRequest {
+    int32 number = 1;
+}
+
+message SquareRootResponse {
+    double number_root = 1;
 }
