@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package blog;
+option go_package = "src/github.com/kratos2511/go_grpc/blog/blogpb";
+
+message Blog {
+    string ID = 1;
+    string AuthorID = 2;
+    string Title = 3;
+    string Content = 4;
+}
+
+message CreateBlogRequest {
+    Blog blog = 1;
+}
+
+message CreateBlogResponse {
+    Blog blog = 1;
+}
+
+message ReadBlogRequest {
+    string blogID = 1;
+}
+
+message ReadBlogResponse {
+    Blog blog = 1;
+}
+
+service BlogService {
+    rpc CreateBlog (CreateBlogRequest) returns (CreateBlogResponse);
+    rpc ReadBlog (ReadBlogRequest) returns (ReadBlogResponse);
+}
